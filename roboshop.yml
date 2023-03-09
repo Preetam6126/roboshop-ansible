@@ -3,3 +3,12 @@
   roles:
     - "{{ role_name }}"
   
+
+
+
+#### bbelow command to run pull mechanism from host ..or node ( remote node(app,backend) from github)
+###ansible-pull -i localhost, -U https://github.com/Preetam6126/roboshop-ansible.git roboshop.yml -e role_name=frontend
+
+
+#### below command to run push mechanism from server (work sation) to remote node
+### git pull; ansible-playbook -i /tmp/inv roboshop.yml -e role_name=frontend 
