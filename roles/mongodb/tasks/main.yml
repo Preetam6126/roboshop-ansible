@@ -1,3 +1,34 @@
-- name: Print mongodb
-  debug:
-      msg: mongodb
+# vim /etc/yum.repos.d/mongo.repo
+# [mongodb-org-4.2]
+# name=MongoDB Repository
+# baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+# gpgcheck=0
+# enabled=1
+# yum install mongodb-org -y 
+# systemctl enable mongod 
+# systemctl start mongod 
+# vim /etc/mongod.conf
+# 127.0.0.1 to 0.0.0.0
+# systemctl restart mongod
+
+- name: Copying setup files for MongoDB repo
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongo.repo
+    
+- name: Installing MongoDB
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+  
+- name: Update MongoDB Listen Address
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+    
+- name: Start systemctl MongoDB
+  ansible.builtin.systemd:
+    name: mongod
+    state: started
+    enable: true
