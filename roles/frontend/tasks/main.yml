@@ -46,7 +46,17 @@
 - name: Download and Extract Frontend App Files
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-    dest: /usr/share/nginx/html
+    dest: /usr/share/nginx/html 
     remote_src: yes
     
+- name: Create Roboshop Config in Nginx
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+    
+- name: Start Nginx Service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: true    
     
