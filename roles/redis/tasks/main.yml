@@ -1,3 +1,36 @@
-- name: Print redis
-  debug:
-      msg: redis
+# yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+# dnf module enable redis:remi-6.2 -y
+# dnf module enable redis:remi-6.2 -y
+# yum install redis -y 
+
+# /etc/redis.conf
+# /etc/redis/redis.conf
+# 127.0.0.1 to 0.0.0.0
+
+# systemctl enable redis 
+# systemctl start redis 
+
+
+
+- name: Install Redis Repos
+  ansible.builtin.yum:
+    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    state: Installed
+    
+- name: Enable version and Install redis
+  ansible.builtin.dnf:
+    name: '@redis:remi-6.2'
+    state: installed
+    disable_gpg_check: yes
+    
+- name: Update Redis Listen Address
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+    
+    - name: Start systemctl Redis
+  ansible.builtin.systemd:
+    name: redis
+    state: started
+    enabled: true
