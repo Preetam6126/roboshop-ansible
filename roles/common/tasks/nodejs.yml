@@ -8,7 +8,7 @@
     
 - name: App Pre-requisites
   ansible.builtin.import_tasks:
-    file: app.prereq.yaml
+    file: app.prereq.yml
     
 - name: Install Nodejs dependencies
   community.general.npm:
