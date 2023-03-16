@@ -52,4 +52,4 @@
       ansible.builtin.shell: mysql -h mysql-dev.devops36.shop -uroot -pRoboShop@1 < /app/schema/{{component}}.sql 
         
        
-       
+
