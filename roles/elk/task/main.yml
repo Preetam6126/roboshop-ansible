@@ -1,4 +1,0 @@
-- name: Run Logstash
-  ansible.builtin.debug:
-  hwo are you
-    
