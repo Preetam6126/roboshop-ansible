@@ -16,7 +16,7 @@
     name:
       - python36
       - gcc 
-      - python3-devel
+      - python3-devel  
     state: installed
     
 - name: App Pre-requisites
@@ -37,6 +37,5 @@
 - name: SystemD Setup
   ansible.builtin.import_tasks:
     file: systemd-setup.yml
-    
     
 
