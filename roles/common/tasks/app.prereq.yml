@@ -61,6 +61,6 @@
 # Download from Nexus    
 - name: Download and Extract {{ component }} App Files
   ansible.builtin.unarchive:
-    src: admin:admin123@172.31.5.233:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+    src: http://admin:admin123@172.31.5.233:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
     dest: /app 
     remote_src: yes
