@@ -48,6 +48,14 @@
 #     src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
 #     dest: /usr/share/nginx/html
 #     remote_src: yes
+ 
+# Download from Nexus    
+- name: Download and Extract {{ component }} App Files
+  ansible.builtin.unarchive:
+    src: admin:admin123@172.31.5.233:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
+    dest: /usr/share/nginx/html 
+    remote_src: yes
+ 
     
 - name: Create Config in Nginx
   ansible.builtin.template:
@@ -72,11 +80,5 @@
 #     dest: /app 
 #     remote_src: yes    
 
-# Download from Nexus    
-- name: Download and Extract {{ component }} App Files
-  ansible.builtin.unarchive:
-    src: admin:admin123@172.31.5.233:8081/repository/{{component}}/{{component}}-{{app_version}}.zip
-    dest: /usr/share/nginx/html 
-    remote_src: yes
 
 
